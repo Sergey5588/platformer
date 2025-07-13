@@ -4,7 +4,7 @@
 #include "stdbool.h"
 #include "stdio.h"
 #include "math.h"
-#define BODY_COUNT 2
+#define BODY_COUNT 3
 
 #define M_PI 3.14159265358979323846
 typedef struct Actor
@@ -35,6 +35,13 @@ void initActor(Actor* actor, bool isStatic, Rectangle hitbox,Texture2D sprite, C
     ShapeDef.material.friction = 0.0f;
     b2CreatePolygonShape(bodyId, &ShapeDef, &bodyBox);
 
+}
+
+
+void def_init(Actor scene[BODY_COUNT], b2WorldId worldId) {
+    for(int i = 0; i < BODY_COUNT; i++) {
+        initActor(&scene[i], true, (Rectangle){1,1,1,1}, (Texture2D){0}, RED, &worldId);
+    }
 }
 
 int main(void)
@@ -73,8 +80,9 @@ int main(void)
 
 
     Actor scene[BODY_COUNT];
+    def_init(scene, worldId);
     initActor(&scene[0], false, (Rectangle){75,0, 10,10}, (Texture2D){0}, BLACK, &worldId);
-    initActor(&scene[1], true, (Rectangle){80,45, 10,10}, (Texture2D){0}, RED, &worldId);
+    initActor(&scene[1], true, (Rectangle){80,45, 100,10}, (Texture2D){0}, RED, &worldId);
 
     float timeStep = 1.0f / 60.0f;
     int subStepCount = 4;
