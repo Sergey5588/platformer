@@ -29,7 +29,7 @@ void initActor(Actor* actor, bool isStatic, Rectangle hitbox,Texture2D sprite, C
     BodyDef.position = (b2Vec2){hitbox.x, hitbox.y};
     b2BodyId bodyId = b2CreateBody(*worldId, &BodyDef);
     actor->bodyId = bodyId;
-    b2Polygon bodyBox = b2MakeBox(hitbox.height/2 , hitbox.width/2); 
+    b2Polygon bodyBox = b2MakeBox(hitbox.width/2 , hitbox.height/2); 
     b2ShapeDef ShapeDef = b2DefaultShapeDef();
     ShapeDef.density = 1.0f;
     ShapeDef.material.friction = 0.0f;
