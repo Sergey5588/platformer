@@ -108,7 +108,7 @@ int main(void)
     initActor(&scene[0], false, (Rectangle){80,0, 16,16}, placholder, (Color){0,0,0,0}, &worldId);
     initActor(&scene[1], true, (Rectangle){80,45, 100,10}, (Texture2D){0}, RED, &worldId);
 
-    float timeStep = 1.0f / 60.0f;
+    float timeStep = 1.0f / 120.0f;
     int subStepCount = 4;
     SetTargetFPS(120);
     //--------------------------------------------------------------------------------------
@@ -119,10 +119,10 @@ int main(void)
         b2World_Step(worldId, timeStep, subStepCount);
 
         Vector2 input_dir = (Vector2){0.0, 0.0};
+        b2Vec2 velocity = b2Body_GetLinearVelocity(scene[0].bodyId);
         get_axis(&input_dir);
 
-        b2Body_SetLinearVelocity(scene[0].bodyId, (b2Vec2){input_dir.x * 10, input_dir.y*10});
-
+        b2Body_SetLinearVelocity(scene[0].bodyId, ((b2Vec2){input_dir.x * 2 + velocity.x, input_dir.y*2+velocity.y}));
         BeginTextureMode(target);
             ClearBackground(RAYWHITE);
 
