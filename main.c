@@ -120,7 +120,6 @@ int main(void)
 
         Vector2 input_dir = (Vector2){0.0, 0.0};
         get_axis(&input_dir);
-        printf("%f %f\n", input_dir.x, input_dir.y);
 
         b2Body_SetLinearVelocity(scene[0].bodyId, (b2Vec2){input_dir.x * 10, input_dir.y*10});
 
